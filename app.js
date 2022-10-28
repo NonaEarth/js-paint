@@ -9,11 +9,14 @@ const colorOptionsOriginal = document.getElementsByClassName('color-option');
 const colorOptions = Array.from(colorOptionsOriginal);
 const color = document.getElementById('color');
 const lineWidth = document.getElementById('line-width');
+const fontSize = document.getElementById('font-size');
 const canvas = document.querySelector('canvas');
 const ctx = canvas?.getContext('2d');
 
 const CANVAS_WIDTH = 800;
 const CANVAS_HEIGHT = 800;
+
+let fontSizeVal = 68;
 
 const app = function () {
 
@@ -72,6 +75,13 @@ const app = function () {
         ctx.lineWidth = parseInt(target.value);
     }
 
+    let onFontSizeChange = function (event) {
+
+        const target = event.target;
+
+        fontSizeVal = parseInt(target.value);
+    }
+
     let onColorChange = function (event) {
 
         const target = event.target;
@@ -90,7 +100,7 @@ const app = function () {
         if (text !== '') {
             ctx.save();
             ctx.lineWidth = 1;
-            ctx.font = '68px serif';
+            ctx.font = `${fontSizeVal}px serif`;
             ctx.fillText(text, event.offsetX, event.offsetY);
             ctx.restore();
         }
@@ -104,6 +114,7 @@ const app = function () {
     canvas.addEventListener('click', onCanvasClick);
 
     lineWidth.addEventListener('change', onLineWidthChange);
+    fontSize.addEventListener('change', onFontSizeChange);
     color.addEventListener('change', onColorChange);
 
     const onColorClick = function (event) {
